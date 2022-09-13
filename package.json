@@ -1,0 +1,34 @@
+{
+  "name": "fastounce",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000F\u0000a\u0000s\u0000t\u0000O\u0000u\u0000n\u0000c\u0000e\u0000\r\u0000 \u0000",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PiojoSistematico/FastOunce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PiojoSistematico/FastOunce/issues"
+  },
+  "homepage": "https://github.com/PiojoSistematico/FastOunce#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
