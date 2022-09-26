@@ -6,7 +6,7 @@ const Post = require("../models/postModel");
 const getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    //res.render("post.ejs", { post: post, user: req.user });
+    res.render("post.ejs", { post: post, user: req.user });
   } catch (err) {
     console.log(err);
   }
@@ -18,20 +18,18 @@ const getPost = async (req, res) => {
 const createPost = async (req, res) => {
   try {
     // Upload image to cloudinary
-    //const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await cloudinary.uploader.upload(req.file.path);
 
     await Post.create({
       title: req.body.title,
-      //image: result.secure_url,
-      //cloudinaryId: result.public_id,
-      image: "dummyurl",
-      cloudinaryId: "dummyid",
+      image: result.secure_url,
+      cloudinaryId: result.public_id,
       caption: req.body.caption,
       likes: 0,
       user: req.user.id,
     });
     console.log("Post has been added!");
-    //res.redirect("/profile");
+    res.redirect("/profile");
   } catch (err) {
     console.log(err);
   }
@@ -49,7 +47,7 @@ const likePost = async (req, res) => {
       }
     );
     console.log("Likes +1");
-    //res.redirect(`/post/${req.params.id}`);
+    res.redirect(`/post/${req.params.id}`);
   } catch (err) {
     console.log(err);
   }
@@ -61,9 +59,9 @@ const likePost = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     // Find post by id
-    //let post = await Post.findById({ _id: req.params.id });
+    let post = await Post.findById({ _id: req.params.id });
     // Delete image from cloudinary
-    //await cloudinary.uploader.destroy(post.cloudinaryId);
+    await cloudinary.uploader.destroy(post.cloudinaryId);
     // Delete post from db
     await Post.remove({ _id: req.params.id });
     console.log("Deleted Post");
