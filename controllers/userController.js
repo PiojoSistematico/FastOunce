@@ -1,6 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/userModel");
+const bcrypt = require("bcrypt");
 
 // @desc    Getting the Login page
 // @route   GET /login
@@ -53,15 +54,21 @@ const postLogin = (req, res, next) => {
 // @desc    Logout and destroy session
 // @route   GET /logout
 // @access  Private
-const logout = (req, res) => {
-  req.logout(() => {
+const logout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
     console.log("User has logged out.");
-  });
-  req.session.destroy((err) => {
-    if (err)
-      console.log("Error : Failed to destroy the session during logout.", err);
-    req.user = null;
-    res.redirect("/");
+    req.session.destroy((err) => {
+      if (err)
+        console.log(
+          "Error : Failed to destroy the session during logout.",
+          err
+        );
+      req.user = null;
+      res.redirect("/");
+    });
   });
 };
 
@@ -130,10 +137,10 @@ const postSignup = (req, res, next) => {
       }); */
 
       bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
           if (err) throw err;
-          newUser.password = hash;
-          newUser
+          user.password = hash;
+          user
             .save()
             .then((user) => {
               //req.flash("success_msg", "You are now registered and can log in");

@@ -1,4 +1,5 @@
 const Post = require("../models/postModel");
+const cloudinary = require("../middleware/cloudinary");
 
 // @desc    Get user post
 // @route   GET /post/:id

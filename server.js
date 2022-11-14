@@ -45,6 +45,7 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: process.env.DB_STRING,
+      /* mongooseConnection: mongoose.connection, */
     }),
   })
 );
