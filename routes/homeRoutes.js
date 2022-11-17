@@ -4,6 +4,7 @@ const {
   getIndex,
   getProfile,
   getFeed,
+  getAddPost,
 } = require("../controllers/homeController");
 const { ensureAuth } = require("../middleware/authMiddleware");
 const {
@@ -17,6 +18,7 @@ const {
 router.get("/", getIndex);
 router.get("/profile", ensureAuth, getProfile);
 router.get("/feed", ensureAuth, getFeed);
+router.get("/addpost", ensureAuth, getAddPost);
 router.get("/login", getLogin);
 router.post("/login", postLogin);
 router.get("/logout", logout);

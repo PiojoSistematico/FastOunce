@@ -1,4 +1,5 @@
 const Post = require("../models/postModel");
+const User = require("../models/userModel");
 const cloudinary = require("../middleware/cloudinary");
 
 // @desc    Get user post
@@ -7,7 +8,8 @@ const cloudinary = require("../middleware/cloudinary");
 const getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    res.render("post.ejs", { post: post, user: req.user });
+    const owner = await User.findById(post.user);
+    res.render("post.ejs", { post: post, user: req.user, owner: owner });
   } catch (err) {
     console.log(err);
   }

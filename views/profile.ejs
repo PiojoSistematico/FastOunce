@@ -1,46 +1,89 @@
-<%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fast Ounce</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/imgs/favicon-32x32.png"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="bg-secondary">
+    <main class="container-md bg-light vh-100">
+      <header class="container">
+        <nav class="navbar row">
+          <h1 class="col-4"><a href="/profile">Fast Ounce</a></h1>
+          <p class="col-4"><strong>Hello </strong>: <%= user.userName %></p>
+          <div class="col-4 row">
+            <a href="/addpost" class="col-6 btn btn-success">New Post</a>
+            <a href="/logout" class="col-6 btn btn-danger">Logout</a>
           </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
+        </nav>
+      </header>
+
+      <hr>
+
+      <div class="row mt-5">
+        <h2 class="col-4">Last Posts in Fast Ounce</h2>
+        <a class="btn btn-primary col-2" href="/feed">Go to the Feed</a>
       </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+
+      <hr>
+
+      <h2 class="col-4">Your Posts</h2>
+
+      <section class="container">
+        <div class="row">
+              <ul class="row list-unstyled">
+              <% for(var i=0; i<posts.length; i++) {%>
+                <li class="col-3 justify-content-between mt-5">
+                  <a href="/post/<%= posts[i]._id%>">
+                    <img class="img-fluid" src="<%= posts[i].image%>">
+                  </a>
+                </li>
+              <% } %>
+              </ul>
         </div>  
-      </div>  
-    </div>
-  </div>
-</div>
-<%- include('partials/footer') -%>
+      </section>
+
+<!--       <section class="container">
+        <div class="row mt-5">
+          <h2 class="col-4">Last Posts in Fast Ounce</h2>
+          <a class="btn btn-primary col-2" href="/feed">See All Posts</a>
+        </div>
+        <div class="row">
+
+              <ul class="row list-unstyled">
+                <% for(var i=0; i<posts.length; i++) {%>
+                  <li class="col-3 justify-content-between mt-5">
+                    <a href="/post/<%= posts[i]._id%>">
+                      <img class="img-fluid" src="<%= posts[i].image%>">
+                    </a>
+                  </li>
+                <% } %>
+              </ul>
+        </div>  
+      </section> -->
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>   
+
+  </body>
+</html>

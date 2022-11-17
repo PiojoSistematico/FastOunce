@@ -25,14 +25,22 @@ const getProfile = async (req, res) => {
 const getFeed = async (req, res) => {
   try {
     const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-    res.render("feed.ejs", { posts: posts });
+    res.render("feed.ejs", { posts: posts, user: req.user });
   } catch (err) {
     console.log(err);
   }
+};
+
+// @desc    Get all users  posts sorted by date
+// @route   GET /feed
+// @access  Private
+const getAddPost = async (req, res) => {
+  res.render("addpost.ejs", { user: req.user });
 };
 
 module.exports = {
   getIndex,
   getProfile,
   getFeed,
+  getAddPost,
 };

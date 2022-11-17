@@ -29,45 +29,46 @@
     <main class="container-md bg-light vh-100">
       <header class="container">
         <nav class="navbar row">
-          <h1 class="col-10"><a href="/profile">Fast Ounce</a></h1>
-          <a href="/signup" class="col-2 btn btn-primary">Signup</a>
+          <h1 class="col-4"><a href="/profile">Fast Ounce</a></h1>
+          <p class="col-4"><strong>Hello </strong>: <%= user.userName %></p>
+          <div class="col-4 row">
+            <a href="/feed" class="col-6 btn btn-primary">Feed</a>
+            <a href="/logout" class="col-6 btn btn-danger">Logout</a>
+          </div>
         </nav>
       </header>
-
       <div class="row justify-content-center">
         <section class="col-6 mt-5">
-          <% if (locals.messages.errors) { %> <% messages.errors.forEach( el =>
-          { %>
-          <div class="alert alert-danger"><%= el.msg %></div>
-          <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-          messages.info.forEach( el => { %>
-          <div class="alert alert-info"><%= el.msg %></div>
-          <% }) %> <% } %>
-          <form action="/login" method="POST">
+          <h2>Add a post</h2>
+          <form
+            action="/post/createPost"
+            enctype="multipart/form-data"
+            method="POST"
+          >
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
-                >Email address</label
-              >
-              <input
-                type="email"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                name="email"
-              />
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" name="title" />
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label"
-                >Password</label
-              >
-              <input
-                type="password"
+              <label for="caption" class="form-label">Caption</label>
+              <textarea
                 class="form-control"
-                id="exampleInputPassword1"
-                name="password"
+                id="caption"
+                name="caption"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="imgUpload" class="form-label">Image</label>
+              <input
+                type="file"
+                class="form-control"
+                id="imageUpload"
+                name="file"
               />
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" value="Upload">
+              Submit
+            </button>
           </form>
         </section>
       </div>
