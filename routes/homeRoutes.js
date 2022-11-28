@@ -16,7 +16,7 @@ const {
 } = require("../controllers/userController");
 
 router.get("/", getIndex);
-router.get("/profile", ensureAuth, getProfile);
+router.get("/profile/:id", ensureAuth, getProfile);
 router.get("/feed", ensureAuth, getFeed);
 router.get("/addpost", ensureAuth, getAddPost);
 router.get("/login", getLogin);

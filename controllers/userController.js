@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 // @access  Private
 const getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    return res.redirect(`/profile/${req.user.id}`);
   }
   res.render("login", {
     title: "Login",
@@ -34,6 +34,7 @@ const postLogin = (req, res, next) => {
   });
 
   passport.authenticate("local", (err, user, info) => {
+    console.log(user);
     if (err) {
       return next(err);
     }
@@ -46,7 +47,7 @@ const postLogin = (req, res, next) => {
         return next(err);
       }
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/profile");
+      res.redirect(req.session.returnTo || `/profile/${user.id}`);
     });
   })(req, res, next);
 };
@@ -77,7 +78,7 @@ const logout = (req, res, next) => {
 // @access  Private
 const getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    return res.redirect(`/profile/${req.user.id}`);
   }
   res.render("signup", {
     title: "Create Account",
@@ -144,7 +145,7 @@ const postSignup = (req, res, next) => {
             .save()
             .then((user) => {
               //req.flash("success_msg", "You are now registered and can log in");
-              res.redirect("/profile");
+              res.redirect("/feed");
             })
             .catch((err) => console.log(err));
         });

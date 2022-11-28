@@ -11,6 +11,8 @@ const getPost = async (req, res) => {
     const post = await Post.findById(req.params.id);
     const owner = await User.findById(post.user);
     const comments = await Comment.find({ post: req.params.id });
+    //console.log(owner.id);
+    //console.log(req.user.id);
     res.render("post.ejs", {
       post: post,
       user: req.user,
@@ -30,6 +32,8 @@ const createPost = async (req, res) => {
     // Upload image to cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
 
+    console.log("---------------- ", req.user.id);
+
     await Post.create({
       title: req.body.title,
       image: result.secure_url,
@@ -39,7 +43,7 @@ const createPost = async (req, res) => {
       user: req.user.id,
     });
     console.log("Post has been added!");
-    res.redirect("/profile");
+    res.redirect(`/profile/${req.user.id}`);
   } catch (err) {
     console.log(err);
   }
@@ -75,9 +79,9 @@ const deletePost = async (req, res) => {
     // Delete post from db
     await Post.remove({ _id: req.params.id });
     console.log("Deleted Post");
-    res.redirect("/profile");
+    res.redirect(`/profile/${req.user.id}`);
   } catch (err) {
-    res.redirect("/profile");
+    res.redirect(`/post/${req.params.id}`);
   }
 };
 

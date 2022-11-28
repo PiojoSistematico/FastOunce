@@ -29,7 +29,7 @@
     <main class="container-md bg-light vh-100">
       <header class="container">
         <nav class="navbar row">
-          <h1 class="col-4"><a href="/profile">Fast Ounce</a></h1>
+          <h1 class="col-4"><a href="/profile/<%= user.id %>">Fast Ounce</a></h1>
           <p class="col-4"><strong>Hello </strong>: <%= user.userName %></p>
           <div class="col-4 row">
             <a href="/feed" class="col-4 btn btn-primary">Feed</a>
@@ -42,7 +42,7 @@
       <div class="container">
         <div class="row justify-content-center mt-5">
           <div class="col-6">
-            <h2>Made by <a href=""><%= owner.userName %></a></h2>
+            <h2>Made by <a href="/profile/<%= owner._id %>"><%= owner.userName %></a></h2>
             <img class="img-fluid" src="<%= post.image%>" />
           </div>
           <div class="col-6">
